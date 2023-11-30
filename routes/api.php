@@ -1,11 +1,8 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController,
-    App\Http\Controllers\SectionController,
-    App\Http\Controllers\TopicController,
-    App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/topics', [TopicController::class, 'create']);
     Route::put('/topics/{topic}', [TopicController::class, 'update']);
     Route::delete('/topics/{topic}', [TopicController::class, 'destroy']);
+    Route::post('/topics/{topic}/close', [TopicController::class, 'close']);
+    Route::post('/topics/{topic}/open', [TopicController::class, 'open']);
 
     Route::get('/comments', [CommentController::class, 'list']);
     Route::get('/comments/{comment}', [CommentController::class, 'retrieve']);

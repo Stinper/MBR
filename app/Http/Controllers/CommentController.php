@@ -36,7 +36,7 @@ class CommentController extends Controller
         }
 
         $topic = new Topic($request->all());
-        $topic->creator_ic = Auth::id();
+        $topic->creator_id = Auth::id();
         $topic->save();
         return response()->json($topic, 201);
     }

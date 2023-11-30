@@ -14,7 +14,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required'
         ]);
 
         if($validator->fails())
@@ -25,7 +25,8 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+//            'group_id' => env('DEFAULT_GROUP_ID')
         ]);
 
         $token = $user->createToken('authToken')->plainTextToken;
