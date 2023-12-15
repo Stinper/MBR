@@ -42,12 +42,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/topics/{topic}', [TopicController::class, 'destroy']);
     Route::post('/topics/{topic}/close', [TopicController::class, 'close']);
     Route::post('/topics/{topic}/open', [TopicController::class, 'open']);
+    Route::post('/topics/{topic}/restrict', [TopicController::class, 'restrict']);
+    Route::post('/topics/{topic}/unrestrict', [TopicController::class, 'unrestrict']);
 
     Route::get('/comments', [CommentController::class, 'list']);
     Route::get('/comments/{comment}', [CommentController::class, 'retrieve']);
     Route::post('/comments', [CommentController::class, 'create']);
     Route::put('/comments/{comment}', [CommentController::class, 'update']);
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
+
+    Route::get('/bans', [BanController::class, 'list']);
+    Route::get('/bans/{ban}', [BanController::class, 'retrieve']);
+    Route::post('/bans', [BanController::class, 'create']);
+    Route::delete('/bans/{ban}', [BanController::class, 'destroy']);
 });
 
 

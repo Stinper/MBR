@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+
 class TopicController extends Controller
 {
     public function list()
@@ -143,4 +144,27 @@ class TopicController extends Controller
         return response()->json($topic);
     }
 
+    public function restrict(Topic $topic)
+    {
+        try {
+            $this->authorize('restrict_topic');
+        } catch (AuthorizationException $e) {
+            return response()->json(['error' => $e->getMessage()], 403);
+        }
+
+        $topic->is_restricted = true;
+        return response()->json($topic);
+    }
+
+    public function unrestrict(Topic $topic)
+    {
+        try {
+            $this->authorize('restrict_topic');
+        } catch (AuthorizationException $e) {
+            return response()->json(['error' => $e->getMessage()], 403);
+        }
+
+        $topic->is_restricted = false;
+        return response()->json($topic);
+    }
 }
